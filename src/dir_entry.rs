@@ -127,7 +127,7 @@ impl ShortName {
 
 #[allow(dead_code)]
 #[derive(Clone, Debug, Default)]
-pub(crate) struct DirFileEntryData {
+pub struct DirFileEntryData {
     name: [u8; SFN_SIZE],
     attrs: FileAttributes,
     reserved_0: u8,
@@ -138,7 +138,7 @@ pub(crate) struct DirFileEntryData {
     first_cluster_hi: u16,
     modify_time: u16,
     modify_date: u16,
-    first_cluster_lo: u16,
+    pub first_cluster_lo: u16,
     size: u32,
 }
 
@@ -532,7 +532,7 @@ impl DirEntryEditor {
 /// `DirEntry` is returned by `DirIter` when reading a directory.
 #[derive(Clone)]
 pub struct DirEntry<'a, IO: ReadWriteSeek, TP, OCC> {
-    pub(crate) data: DirFileEntryData,
+    pub data: DirFileEntryData,
     pub(crate) short_name: ShortName,
     #[cfg(feature = "lfn")]
     pub(crate) lfn_utf16: LfnBuffer,
